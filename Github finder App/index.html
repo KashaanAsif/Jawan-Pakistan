@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub User Finder</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Github User Finder</a>
+    </nav>
+    <div class="container mt-5">
+      <div class="form-row">
+        <div class="col-md-8">
+          <input
+            type="text"
+            class="form-control custom-search"
+            id="github-username"
+            placeholder="Search GitHub username…"
+          />
+          <div
+            id="error-message"
+            class="text-danger mt-2"
+            style="display: none"
+          >
+            Please enter a GitHub username or ensure it is correct.
+          </div>
+        </div>
+        <div class="col-md-4">
+          <button
+            class="btn btn-primary btn-block custom-btn"
+            onclick="searchUser()"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+      <div class="mt-4" id="user-info"></div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

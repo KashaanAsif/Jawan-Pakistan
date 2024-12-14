@@ -1,44 +1,30 @@
-let cardDiv = document.getElementById("cardDiv");
-let inputData = document.getElementById("inputField");
+const input1 = document.getElementById("input");
+const search = document.getElementById("src");
+const card1 = document.getElementById("card");
 
-const searchNews = () => {
-  const API_KEY = `https://newsapi.org/v2/everything?q=${inputData.value}&from=2024-11-08&sortBy=publishedAt&apiKey=25f09f5c1d67452d876631d87c5d7b15`;
 
-  cardDiv.innerHTML = `
-    <div class="d-flex justify-content-center my-3">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
-  `;
+const searchNews =() => {
+  event.preventDefault();
+  const API_KEY = `https://newsapi.org/v2/everything?q=${input1.value}&from=2024-11-10&sortBy=publishedAt&apiKey=25f09f5c1d67452d876631d87c5d7b15`;
 
   fetch(API_KEY)
-    .then((response) => {
-      return response.json();
+    .then((res) => {
+      return res.json();
     })
     .then((data) => {
-      cardDiv.innerHTML = "";
-
-      data.articles.forEach((e) => {
-        const cardHTML = `
-          <div class="card" style="width: 18rem; margin: 1rem;">
-            <img src="${
-              e.urlToImage || "placeholder.jpg"
-            }" class="card-img-top" alt="Image"> 
-            <div class="card-body">
-              <h5 class="card-title">${e.title}</h5>
-              <p class="card-text">${e.description}</p>
-              <a href="${
-                e.url
-              }" class="btn btn-primary" target="_blank">Read More</a>
-            </div>
-          </div>
-        `;
-        cardDiv.innerHTML += cardHTML;
+      card1.innerHTML = "";
+      data.articles.map((e) => {
+        card1.innerHTML += `    <div class="card rounded" style="width: 15rem">
+        <img src="${e.urlToImage} class="card-img-top" alt="No Image Found" />
+        <div class="card-body">
+          <h5 class="card-title">${e.title}</h5>
+          <p class="card-text">${e.description}</p>
+          <p class="text-muted">By ${e.author || "Unknown"}</p>
+          <a href="${e.url}" class="btn btn-primary" target="_blank">Read more</a>
+        </div>`;
       });
     })
-    .catch((error) => {
-      console.error("Error occurred:", error);
-      cardDiv.innerHTML = `<p>An error occurred while fetching news.</p>`;
+    .catch((err) => {
+      console.log("Error:", err);
     });
 };
